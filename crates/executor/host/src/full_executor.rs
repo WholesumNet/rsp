@@ -73,6 +73,8 @@ pub trait BlockExecutor<C: ExecutorComponents> {
         let mut stdin = SP1Stdin::new();
         let buffer = bincode::serialize(&client_input).unwrap();
 
+        std::fs::write("stdin.bin", &buffer)?;
+
         stdin.write_vec(buffer);
 
         if self.config().skip_client_execution {
